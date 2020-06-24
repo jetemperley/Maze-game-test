@@ -1,0 +1,67 @@
+using System;
+
+
+namespace test{
+
+    public static class Collider{
+
+
+        // rectangle points are labled 0-3 starting at top right
+        // assumption: object is moving
+        private static Rect r1, r2;
+
+        public static void initCollider(){
+            r1 = new Rect();
+            r2 = new Rect();
+        }
+
+        public static boolean check(WorldObject wo1, WorldObject wo2){
+            // generate rects
+            if (wo1.dx == 0){
+                // if moving vertically, check only vert movement rect
+                if (wo1.dy > 0){
+                    r1.setRect(wo1.x, wo1.y, wo1.width, wo1.height+wo1.dy);
+
+                } else {
+                    r1.setRect(wo1.x, wo1.y+wo1.dy, wo1.width, wo1.height-wo1.dy);
+                }
+
+                r1.nullifyBounds();
+            } else if (wo1.dy == 0){ 
+                if (wo1.dx > 0){
+                    r1.setRect(wo1.x, wo1.y, wo1.width + wo1.dx, wo1.height);
+                } else {
+                    r1.setRect(wo1.x+wo1.dx, wo1.y, wo1.width-wo1.dx, wo1.height);
+                }
+                r1.nullifyBounds();
+            } else {
+                if (wo1.dx > 0){
+                    if (wo1.dy > 0){
+                        // ++ south east
+                        r1.setRect(wo1.x, wo1.y, wo1.dx+wo1.width, wo1.dy + wo1.height);
+                        r1.setUpperBound(wo1.dy/(float)wo1.dx, wo1.x+wo1.width, wo1.y);
+                        r1.setLowerBound(wo1.dy/(float)wo1.dx, wo1.x, wo1.y + wo1.height);
+
+                    } else if (wo1.dy < 0){
+                        // +- north east
+                        r1.setRect(wo1.x, wo1.y+wo1.dy, wo1.dx+wo1.width, wo1.dy - wo1.height);
+                        r1.setUpperBound(wo1.dy/(float)wo1.dx, wo1.x+wo1.width, wo1.y);
+                        r1.setLowerBound(wo1.dy/(float)wo1.dx, wo1.x + wo1.width, wo1.y + wo1.height);
+                    }
+
+                } else { // dx < 0
+                    if (wo1.dy > 0){
+                        // -+ south west
+
+                    } else if (wo1.dy < 0){
+                        // -- north west
+                        
+                    }
+
+                }
+
+            }
+            
+        }
+    }
+}
