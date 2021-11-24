@@ -47,7 +47,7 @@ namespace test {
 
         public void add (WorldObject wo) {
 
-            Console.WriteLine ($" y {wo.y / (3 * gc.MINOR_TILES_N)} x {wo.x / (3 * gc.MINOR_TILES_N)}");
+            Console.WriteLine (" y " + (wo.y / (3 * gc.MINOR_TILES_N)) + " x " + (wo.x / (3 * gc.MINOR_TILES_N)));
         
             if (wo.terrain == false){
                 movers.Add(wo);

@@ -37,7 +37,7 @@ namespace test{
             //System.out.println("yTiles = " + yTiles);
 
             uiSize = screenHeight / uiN;
-            Console.WriteLine($"tilesize {tileSize}");
+            Console.WriteLine("tilesize "+ tileSize);
             minorSize = tileSize/MINOR_TILES_N;
             gc = this;
 
